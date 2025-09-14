@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "KRIMSON",
+    "handle": "@KRIMSON",
+    "streak": "2 WEEKS STREAK 🔥",
+    "points": 148,
+    "avatar": "/avatars/user_krimson.png",
+    "featured": true,
+    "subtitle": "2 WEEKS STREAK 🔥"
+  },
+  {
+    "id": 2,
+    "name": "MATI",
+    "handle": "@MATI",
+    "streak": "",
+    "points": 129,
+    "avatar": "/avatars/user_mati.png"
+  },
+  {
+    "id": 3,
+    "name": "PEK",
+    "handle": "@MATT",
+    "streak": "",
+    "points": 108,
+    "avatar": "/avatars/user_pek.png"
+  },
+  {
+    "id": 4,
+    "name": "JOYBOY",
+    "handle": "@JOYBOY",
+    "streak": "",
+    "points": 64,
+    "avatar": "/avatars/user_joyboy.png"
+  }
+]
