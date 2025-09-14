@@ -61,19 +61,15 @@ export default function BuggyStat({ label, value, description, icon: Icon, tag, 
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-md bg-muted">
-            <Icon className="w-4 h-4 text-muted-foreground" />
+            <Icon className="w-4 h-4 text-foreground/70" />
           </div>
-          <span className="text-sm font-medium text-muted-foreground tracking-wider">{label}</span>
+          <span className="text-sm font-medium text-foreground/80 tracking-wider">{label}</span>
         </div>
 
         {direction && (
           <div
             className={`flex items-center gap-1 ${
-              intent === "positive"
-                ? "text-green-500"
-                : intent === "negative"
-                  ? "text-red-500"
-                  : "text-muted-foreground"
+              intent === "positive" ? "text-green-500" : intent === "negative" ? "text-red-500" : "text-foreground/70"
             }`}
           >
             {/* Bug: Wrong arrow direction logic */}
@@ -98,7 +94,7 @@ export default function BuggyStat({ label, value, description, icon: Icon, tag, 
           )}
         </div>
 
-        <p className="text-xs text-muted-foreground tracking-wider">{description}</p>
+        <p className="text-xs text-foreground/70 tracking-wider">{description}</p>
         {hasError && <p className="text-xs text-red-500">🐛 Bug detected: Invalid percentage value</p>}
       </div>
 

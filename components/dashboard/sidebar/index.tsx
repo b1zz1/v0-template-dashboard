@@ -135,7 +135,7 @@ export function DashboardSidebar({ className, ...props }: React.ComponentProps<t
                       ) : (
                         <a href={item.url} className="text-sidebar-foreground">
                           <item.icon className="size-5" />
-                          <span>{item.title}</span>
+                          <span className="text-sidebar-foreground">{item.title}</span>
                         </a>
                       )}
                     </SidebarMenuButton>

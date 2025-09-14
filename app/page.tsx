@@ -80,7 +80,7 @@ export default function DashboardOverview() {
         }}
       >
         <div className="flex items-center justify-center h-64">
-          <div className="text-muted-foreground">Generating random data...</div>
+          <div className="text-foreground/70">Generating random data...</div>
         </div>
       </DashboardPageLayout>
     )

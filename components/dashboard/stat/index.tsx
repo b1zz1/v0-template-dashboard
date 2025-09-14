@@ -44,7 +44,7 @@ export default function DashboardStat({ label, value, description, icon, tag, in
   const getIntentClassName = () => {
     if (intent === "positive") return "text-success"
     if (intent === "negative") return "text-destructive"
-    return "text-foreground/70" // improved contrast from text-muted-foreground
+    return "text-muted-foreground"
   }
 
   const { prefix, numericValue, suffix, isNumeric } = parseValue(value)
@@ -52,20 +52,18 @@ export default function DashboardStat({ label, value, description, icon, tag, in
   return (
     <Card className="relative overflow-hidden">
       <CardHeader className="flex items-center justify-between">
-        <CardTitle className="flex items-center gap-2.5 text-foreground">
+        <CardTitle className="flex items-center gap-2.5 text-muted-foreground">
           {" "}
-          {/* improved contrast */}
           <Bullet />
           {label}
         </CardTitle>
-        <Icon className="size-4 text-foreground/60" /> {/* improved contrast from text-muted-foreground */}
+        <Icon className="size-4 text-muted-foreground" />
       </CardHeader>
 
       <CardContent className="bg-accent flex-1 pt-2 md:pt-6 overflow-clip relative">
         <div className="flex items-center">
           <span className="text-4xl md:text-5xl font-display text-foreground">
             {" "}
-            {/* improved contrast */}
             {isNumeric ? <NumberFlow value={numericValue} prefix={prefix} suffix={suffix} /> : value}
           </span>
           {tag && (
@@ -77,11 +75,7 @@ export default function DashboardStat({ label, value, description, icon, tag, in
 
         {description && (
           <div className="justify-between">
-            <p className="text-xs md:text-sm font-medium text-foreground/70 tracking-wide">
-              {" "}
-              {/* improved contrast */}
-              {description}
-            </p>
+            <p className="text-xs md:text-sm font-medium text-muted-foreground tracking-wide"> {description}</p>
           </div>
         )}
 
