@@ -1,54 +1,47 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Bullet } from "@/components/ui/bullet";
-import NotificationItem from "./notification-item";
-import type { Notification } from "@/types/dashboard";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Bullet } from "@/components/ui/bullet"
+import NotificationItem from "./notification-item"
+import type { Notification } from "@/types/dashboard"
+import { AnimatePresence, motion } from "framer-motion"
 
 interface NotificationsProps {
-  initialNotifications: Notification[];
+  initialNotifications: Notification[]
 }
 
-export default function Notifications({
-  initialNotifications,
-}: NotificationsProps) {
-  const [notifications, setNotifications] =
-    useState<Notification[]>(initialNotifications);
-  const [showAll, setShowAll] = useState(false);
+export default function Notifications({ initialNotifications }: NotificationsProps) {
+  const [notifications, setNotifications] = useState<Notification[]>(initialNotifications)
+  const [showAll, setShowAll] = useState(false)
 
-  const unreadCount = notifications.filter((n) => !n.read).length;
-  const displayedNotifications = showAll
-    ? notifications
-    : notifications.slice(0, 3);
+  const unreadCount = notifications.filter((n) => !n.read).length
+  const displayedNotifications = showAll ? notifications : notifications.slice(0, 3)
 
   const markAsRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((notif) => (notif.id === id ? { ...notif, read: true } : notif))
-    );
-  };
+    setNotifications((prev) => prev.map((notif) => (notif.id === id ? { ...notif, read: true } : notif)))
+  }
 
   const deleteNotification = (id: string) => {
-    setNotifications((prev) => prev.filter((notif) => notif.id !== id));
-  };
+    setNotifications((prev) => prev.filter((notif) => notif.id !== id))
+  }
 
   const clearAll = () => {
-    setNotifications([]);
-  };
+    setNotifications([])
+  }
 
   return (
     <Card className="h-full">
       <CardHeader className="flex items-center justify-between pl-3 pr-1">
-        <CardTitle className="flex items-center gap-2.5 text-sm font-medium uppercase">
+        <CardTitle className="flex items-center gap-2.5 text-sm font-medium uppercase text-foreground">
           {unreadCount > 0 ? <Badge>{unreadCount}</Badge> : <Bullet />}
           Notifications
         </CardTitle>
         {notifications.length > 0 && (
           <Button
-            className="opacity-50 hover:opacity-100 uppercase"
+            className="text-foreground/70 hover:text-foreground uppercase"
             size="sm"
             variant="ghost"
             onClick={clearAll}
@@ -70,19 +63,13 @@ export default function Notifications({
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 key={notification.id}
               >
-                <NotificationItem
-                  notification={notification}
-                  onMarkAsRead={markAsRead}
-                  onDelete={deleteNotification}
-                />
+                <NotificationItem notification={notification} onMarkAsRead={markAsRead} onDelete={deleteNotification} />
               </motion.div>
             ))}
 
             {notifications.length === 0 && (
               <div className="text-center py-8">
-                <p className="text-sm text-muted-foreground">
-                  No notifications
-                </p>
+                <p className="text-sm text-foreground/70">No notifications</p>
               </div>
             )}
 
@@ -99,7 +86,7 @@ export default function Notifications({
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowAll(!showAll)}
-                  className="w-full"
+                  className="w-full text-foreground"
                 >
                   {showAll ? "Show Less" : `Show All (${notifications.length})`}
                 </Button>
@@ -109,5 +96,5 @@ export default function Notifications({
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

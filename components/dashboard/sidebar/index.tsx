@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import type * as React from "react"
 
 import {
   Sidebar,
@@ -15,25 +15,21 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import AtomIcon from "@/components/icons/atom";
-import BracketsIcon from "@/components/icons/brackets";
-import ProcessorIcon from "@/components/icons/proccesor";
-import CuteRobotIcon from "@/components/icons/cute-robot";
-import EmailIcon from "@/components/icons/email";
-import GearIcon from "@/components/icons/gear";
-import MonkeyIcon from "@/components/icons/monkey";
-import DotsVerticalIcon from "@/components/icons/dots-vertical";
-import { Bullet } from "@/components/ui/bullet";
-import LockIcon from "@/components/icons/lock";
-import Image from "next/image";
-import { useIsV0 } from "@/lib/v0-context";
+} from "@/components/ui/sidebar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { cn } from "@/lib/utils"
+import AtomIcon from "@/components/icons/atom"
+import BracketsIcon from "@/components/icons/brackets"
+import ProcessorIcon from "@/components/icons/proccesor"
+import CuteRobotIcon from "@/components/icons/cute-robot"
+import EmailIcon from "@/components/icons/email"
+import GearIcon from "@/components/icons/gear"
+import MonkeyIcon from "@/components/icons/monkey"
+import DotsVerticalIcon from "@/components/icons/dots-vertical"
+import { Bullet } from "@/components/ui/bullet"
+import LockIcon from "@/components/icons/lock"
+import Image from "next/image"
+import { useIsV0 } from "@/lib/v0-context"
 
 // This is sample data for the sidebar
 const data = {
@@ -90,13 +86,10 @@ const data = {
     email: "krimson@joyco.studio",
     avatar: "/avatars/user_krimson.png",
   },
-};
+}
 
-export function DashboardSidebar({
-  className,
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
-  const isV0 = useIsV0();
+export function DashboardSidebar({ className, ...props }: React.ComponentProps<typeof Sidebar>) {
+  const isV0 = useIsV0()
 
   return (
     <Sidebar {...props} className={cn("py-sides", className)}>
@@ -105,17 +98,14 @@ export function DashboardSidebar({
           <MonkeyIcon className="size-10 group-hover:scale-[1.7] origin-top-left transition-transform" />
         </div>
         <div className="grid flex-1 text-left text-sm leading-tight">
-          <span className="text-2xl font-display">M.O.N.K.Y.</span>
-          <span className="text-xs uppercase">The OS for Rebels</span>
+          <span className="text-2xl font-display text-sidebar-primary-foreground">M.O.N.K.Y.</span>
+          <span className="text-xs uppercase text-sidebar-primary-foreground/90">The OS for Rebels</span>
         </div>
       </SidebarHeader>
 
       <SidebarContent>
         {data.navMain.map((group, i) => (
-          <SidebarGroup
-            className={cn(i === 0 && "rounded-t-none")}
-            key={group.title}
-          >
+          <SidebarGroup className={cn(i === 0 && "rounded-t-none")} key={group.title}>
             <SidebarGroupLabel>
               <Bullet className="mr-2" />
               {group.title}
@@ -125,10 +115,7 @@ export function DashboardSidebar({
                 {group.items.map((item) => (
                   <SidebarMenuItem
                     key={item.title}
-                    className={cn(
-                      item.locked && "pointer-events-none opacity-50",
-                      isV0 && "pointer-events-none"
-                    )}
+                    className={cn(item.locked && "pointer-events-none opacity-50", isV0 && "pointer-events-none")}
                     data-disabled={item.locked}
                   >
                     <SidebarMenuButton
@@ -136,8 +123,8 @@ export function DashboardSidebar({
                       isActive={item.isActive}
                       disabled={item.locked}
                       className={cn(
-                        "disabled:cursor-not-allowed",
-                        item.locked && "pointer-events-none"
+                        "disabled:cursor-not-allowed text-sidebar-foreground",
+                        item.locked && "pointer-events-none",
                       )}
                     >
                       {item.locked ? (
@@ -146,7 +133,7 @@ export function DashboardSidebar({
                           <span>{item.title}</span>
                         </div>
                       ) : (
-                        <a href={item.url}>
+                        <a href={item.url} className="text-sidebar-foreground">
                           <item.icon className="size-5" />
                           <span>{item.title}</span>
                         </a>
@@ -178,7 +165,7 @@ export function DashboardSidebar({
                   <PopoverTrigger className="flex gap-0.5 w-full group cursor-pointer">
                     <div className="shrink-0 flex size-14 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground overflow-clip">
                       <Image
-                        src={data.user.avatar}
+                        src={data.user.avatar || "/placeholder.svg"}
                         alt={data.user.name}
                         width={120}
                         height={120}
@@ -186,22 +173,17 @@ export function DashboardSidebar({
                     </div>
                     <div className="group/item pl-3 pr-1.5 pt-2 pb-1.5 flex-1 flex bg-sidebar-accent hover:bg-sidebar-accent-active/75 items-center rounded group-data-[state=open]:bg-sidebar-accent-active group-data-[state=open]:hover:bg-sidebar-accent-active group-data-[state=open]:text-sidebar-accent-foreground">
                       <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate text-xl font-display">
+                        <span className="truncate text-xl font-display text-sidebar-accent-foreground">
                           {data.user.name}
                         </span>
-                        <span className="truncate text-xs uppercase opacity-50 group-hover/item:opacity-100">
+                        <span className="truncate text-xs uppercase text-sidebar-accent-foreground/90 group-hover/item:text-sidebar-accent-foreground">
                           {data.user.email}
                         </span>
                       </div>
                       <DotsVerticalIcon className="ml-auto size-4" />
                     </div>
                   </PopoverTrigger>
-                  <PopoverContent
-                    className="w-56 p-0"
-                    side="bottom"
-                    align="end"
-                    sideOffset={4}
-                  >
+                  <PopoverContent className="w-56 p-0" side="bottom" align="end" sideOffset={4}>
                     <div className="flex flex-col">
                       <button className="flex items-center px-4 py-2 text-sm hover:bg-accent">
                         <MonkeyIcon className="mr-2 h-4 w-4" />
@@ -222,5 +204,5 @@ export function DashboardSidebar({
 
       <SidebarRail />
     </Sidebar>
-  );
+  )
 }

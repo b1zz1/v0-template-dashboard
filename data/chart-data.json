@@ -1,0 +1,54 @@
+{
+  "week": [
+    {
+      "date": "06/07",
+      "sales": 125000,
+      "spendings": 45000,
+      "coffee": 15000
+    },
+    {
+      "date": "07/07",
+      "sales": 280000,
+      "spendings": 32000,
+      "coffee": 28000
+    },
+    {
+      "date": "08/07",
+      "sales": 195000,
+      "spendings": 67000,
+      "coffee": 22000
+    },
+    {
+      "date": "09/07",
+      "sales": 8500000,
+      "spendings": 55000,
+      "coffee": 35000
+    },
+    {
+      "date": "10/07",
+      "sales": 145000,
+      "spendings": 28000,
+      "coffee": 18000
+    },
+    {
+      "date": "11/07",
+      "sales": 220000,
+      "spendings": 48000,
+      "coffee": 25000
+    },
+    {
+      "date": "12/07",
+      "sales": 380000,
+      "spendings": 41000,
+      "coffee": 31000
+    },
+    {
+      "date": "13/07",
+      "sales": 165000,
+      "spendings": 39000,
+      "coffee": 19000
+    }
+  ],
+  "month": [],
+  "year": []
+}
