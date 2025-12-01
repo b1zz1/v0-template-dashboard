@@ -1,19 +1,17 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function MemoryLeakComponent() {
-  const [count, setCount] = useState(0)
-  const [data, setData] = useState<any[]>([])
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    // BUG: Memory leak - interval not cleared
     const interval = setInterval(() => {
-      setCount((prev) => prev + 1)
+      setCount((prev) => prev + 1);
 
-      // BUG: Continuously adding to array without cleanup
       setData((prev) => [
         ...prev,
         {
@@ -21,39 +19,31 @@ export default function MemoryLeakComponent() {
           timestamp: new Date().toISOString(),
           randomData: Math.random() * 1000,
         },
-      ])
-    }, 1000)
-
-    // BUG: Missing cleanup function
-    // return () => clearInterval(interval)
-  }, [])
+      ]);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
-    // BUG: Event listener not removed
     const handleResize = () => {
-      console.log("[v0] Window resized, data length:", data.length)
-    }
+      console.log("[v0] Window resized, data length:", data.length);
+    };
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
 
-    // BUG: Missing cleanup
-    // return () => window.removeEventListener('resize', handleResize)
-  }, [data.length])
-
-  // BUG: Expensive operation on every render
-  const expensiveCalculation = () => {
-    let result = 0
-    for (let i = 0; i < 100000; i++) {
-      result += Math.random()
-    }
-    return result
-  }
+    return () => window.removeEventListener("resize", handleResize);
+  }, [data.length]);
 
   const handleClearData = () => {
-    // BUG: Only clears data but not the intervals
-    setData([])
-    setCount(0)
-  }
+    setData([]);
+    setCount(0);
+  };
+
+  useEffect(() => {
+    if (count > 15) {
+      handleClearData();
+    }
+  }, [count]);
 
   return (
     <Card>
@@ -64,8 +54,6 @@ export default function MemoryLeakComponent() {
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="text-sm">Expensive calculation result: {expensiveCalculation().toFixed(2)}</div>
-
         <div className="max-h-32 overflow-y-auto text-xs">
           {data.slice(-5).map((item) => (
             <div key={item.id}>
@@ -75,9 +63,9 @@ export default function MemoryLeakComponent() {
         </div>
 
         <Button onClick={handleClearData} variant="destructive">
-          Clear Data (Won't Fix Memory Leaks)
+          Clear Data
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
